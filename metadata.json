@@ -1,0 +1,8 @@
+{
+  "name": "Catrizzz Store",
+  "description": "Catrizzz Store — Toko online terpercaya dengan desain minimalist blue glow, checkout aman, pembayaran QRIS resmi, konfirmasi WhatsApp otomatis, dan pelacakan resi unik.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

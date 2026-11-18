@@ -1,0 +1,1566 @@
+# MASTER PROMPT — PEMBUATAN WEBSITE E-COMMERCE CATRIZZZ STORE
+
+Bertindaklah sebagai **Senior Full-Stack Developer, UI/UX Designer, Software Architect, Database Engineer, dan Security Engineer** yang berpengalaman membangun website e-commerce modern.
+
+Saya ingin kamu membangun sebuah website e-commerce bernama **CATRIZZZ STORE** yang benar-benar berfungsi, interaktif, responsif, aman, dan siap dikembangkan menjadi toko online sungguhan.
+
+Jangan hanya membuat desain atau prototype statis. Bangun website dengan frontend, backend, database, sistem autentikasi, sistem transaksi, sistem pembayaran QRIS, manajemen produk, dan dashboard admin yang saling terhubung.
+
+Semua tombol, ikon, formulir, menu, filter, dan fitur harus memiliki fungsi nyata. Jangan membuat tombol dekoratif yang tidak bekerja.
+
+Jika ada detail teknis yang belum ditentukan, gunakan keputusan teknis yang paling masuk akal dan jelaskan asumsi tersebut di dokumentasi. Jangan menghentikan pengerjaan hanya karena detail non-esensial belum tersedia.
+
+---
+
+# 1. IDENTITAS DAN KONSEP WEBSITE
+
+**Nama toko:** Catrizzz Store
+
+**Jenis website:** Online Store / E-Commerce
+
+**Nomor WhatsApp resmi toko:**
+6287738172871
+
+**Link WhatsApp:**
+https://wa.me/6287738172871
+
+**Konsep desain:**
+- Minimalist Blue Glow.
+- Modern, elegan, futuristik, bersih, dan profesional.
+- Nuansa toko online premium.
+- Tampilan tidak terlalu ramai.
+- Fokus utama tetap pada produk dan kemudahan transaksi.
+- Memiliki animasi halus dan interaksi yang responsif.
+
+**Palet warna:**
+- Primary: Electric Blue / Neon Blue.
+- Secondary: Sky Blue.
+- Background: Midnight Blue atau Deep Navy.
+- Surface: Dark Blue dengan sedikit transparansi.
+- Accent: Soft Cyan.
+- Text Primary: Putih.
+- Text Secondary: Light Gray.
+
+Gunakan efek visual:
+- Blue glow pada tombol utama.
+- Soft shadow.
+- Gradient biru yang halus.
+- Glassmorphism secukupnya.
+- Hover animation.
+- Smooth transition.
+- Subtle floating animation jika sesuai.
+- Border bercahaya tipis pada elemen penting.
+
+Jangan menggunakan efek glow berlebihan yang membuat website sulit dibaca.
+
+**Tipografi:**
+Gunakan font modern seperti Inter, Plus Jakarta Sans, atau font sans-serif sejenis.
+
+**Responsivitas:**
+Website wajib memiliki desain responsif untuk:
+- Smartphone Android.
+- iPhone.
+- Tablet.
+- Laptop.
+- Desktop.
+
+Utamakan pengalaman mobile karena kemungkinan besar pelanggan mengakses toko melalui smartphone.
+
+---
+
+# 2. TEKNOLOGI DAN ARSITEKTUR
+
+Gunakan stack teknologi yang stabil dan mudah dikembangkan.
+
+Rekomendasi:
+- Frontend: React + TypeScript.
+- Styling: Tailwind CSS.
+- Backend: Node.js server atau backend server-side yang sesuai.
+- Database: Firebase Firestore.
+- Authentication: Firebase Authentication.
+- Storage: Firebase Storage.
+- Server-side transaction dan validasi: Firebase Cloud Functions atau backend server yang aman.
+- Icon: Lucide Icons.
+- Animasi: Framer Motion atau alternatif ringan.
+- Routing: React Router.
+
+Jika Gemini AI Studio menyediakan integrasi Firebase secara langsung, manfaatkan integrasi tersebut.
+
+**Aturan arsitektur:**
+
+1. Jangan menyimpan transaksi hanya di localStorage.
+2. Seluruh data produk, pesanan, pembayaran, diskon, dan pengaturan toko harus tersimpan secara permanen di database.
+3. Frontend tidak boleh memiliki akses langsung untuk memanipulasi status pembayaran menjadi lunas.
+4. Validasi harga, stok, diskon, biaya pengiriman, dan total transaksi wajib dilakukan di backend.
+5. Gunakan server-side validation untuk seluruh proses penting.
+6. Gunakan database transaction untuk proses checkout yang memengaruhi stok dan penggunaan kupon.
+7. Terapkan autentikasi dan otorisasi untuk dashboard admin.
+8. Gunakan environment variables atau secret manager untuk seluruh konfigurasi rahasia.
+9. Jangan pernah menaruh private key, service account, atau kredensial rahasia di frontend.
+10. Terapkan security rules yang membatasi akses database dan storage sesuai peran pengguna.
+
+Buat struktur kode yang rapi, modular, mudah diperbaiki, dan mudah dikembangkan.
+
+---
+
+# 3. HALAMAN UTAMA / HOMEPAGE
+
+Buat homepage yang menarik dengan susunan berikut.
+
+## A. Navbar
+
+Navbar harus memiliki:
+- Logo Catrizzz Store.
+- Menu Home.
+- Menu Semua Produk.
+- Menu Kategori.
+- Menu Cek Resi.
+- Menu Tentang Kami.
+- Icon Search.
+- Icon Keranjang.
+- Tombol WhatsApp.
+- Tombol Login Admin yang hanya ditampilkan sesuai aturan akses, bukan sebagai jalur bebas menuju dashboard.
+
+Fitur navbar:
+- Sticky navbar saat halaman di-scroll.
+- Responsive mobile navigation.
+- Hamburger menu untuk smartphone.
+- Smooth scrolling.
+- Hover animation pada menu.
+- Semua icon memiliki tooltip atau label aksesibel.
+- Keranjang menampilkan jumlah produk yang dipilih.
+
+## B. Hero Section
+
+Buat hero section dengan desain premium dan modern.
+
+Tampilkan:
+- Headline utama: "WELCOME TO CATRIZZZ STORE".
+- Subheadline: "Your Trusted Place for Better Shopping Experience".
+- Deskripsi toko yang dapat diubah dari dashboard admin.
+- Tombol "Belanja Sekarang".
+- Tombol "Lihat Produk".
+- Visual produk atau banner promosi.
+- Background deep blue dengan efek blue glow.
+
+Konten hero, gambar banner, headline, dan tombol harus dapat diubah melalui dashboard admin.
+
+## C. Kategori Produk
+
+Buat section kategori produk dengan tampilan card atau icon.
+
+Setiap kategori memiliki:
+- Nama kategori.
+- Gambar atau icon.
+- Deskripsi singkat.
+- Jumlah produk.
+- Tombol untuk melihat produk berdasarkan kategori.
+
+Admin dapat menambah, mengedit, menghapus, dan mengurutkan kategori.
+
+## D. Produk Unggulan
+
+Tampilkan produk unggulan pada homepage.
+
+Setiap card produk berisi:
+- Foto produk.
+- Nama produk.
+- Kategori.
+- Harga.
+- Harga diskon jika tersedia.
+- Badge "Best Seller", "New", atau "Promo".
+- Status stok.
+- Rating dan jumlah ulasan jika fitur ulasan diaktifkan.
+- Tombol Detail.
+- Tombol Tambah ke Keranjang.
+
+Card produk harus memiliki hover effect yang elegan.
+
+Seluruh data harus berasal dari database, bukan data statis yang ditanam di dalam frontend.
+
+## E. Banner Promosi
+
+Buat section banner promosi yang dapat dikelola oleh admin.
+
+Admin dapat:
+- Upload gambar banner.
+- Mengubah headline.
+- Mengubah deskripsi.
+- Mengubah tombol dan tujuan link.
+- Menentukan periode tampil.
+- Mengaktifkan atau menonaktifkan banner.
+
+## F. Keunggulan Toko
+
+Tampilkan beberapa keunggulan toko seperti:
+- Pembelian mudah.
+- Pembayaran QRIS.
+- Transaksi tercatat.
+- Bukti transaksi tersedia.
+- Layanan pelanggan melalui WhatsApp.
+
+Seluruh teks dapat diedit melalui dashboard admin.
+
+## G. Footer
+
+Footer harus berisi:
+- Logo Catrizzz Store.
+- Deskripsi toko.
+- Menu navigasi.
+- Kontak WhatsApp.
+- Media sosial.
+- Informasi kebijakan privasi.
+- Syarat dan ketentuan.
+- Kebijakan pengembalian.
+- Copyright.
+
+Kontak WhatsApp harus mengarah ke:
+
+https://wa.me/6287738172871
+
+Konten footer juga harus dapat dikelola admin.
+
+---
+
+# 4. HALAMAN SEMUA PRODUK
+
+Buat halaman katalog produk yang lengkap.
+
+Fitur yang wajib ada:
+
+1. Menampilkan seluruh produk aktif dari database.
+2. Search produk berdasarkan nama.
+3. Filter berdasarkan kategori.
+4. Filter harga minimum dan maksimum.
+5. Filter produk tersedia dan habis.
+6. Sorting berdasarkan harga terendah.
+7. Sorting berdasarkan harga tertinggi.
+8. Sorting produk terbaru.
+9. Sorting produk terlaris jika data penjualan tersedia.
+10. Pagination atau infinite loading.
+11. Tampilan grid yang responsif.
+12. Tombol reset filter.
+
+Setiap produk memiliki halaman detail tersendiri.
+
+## Detail Produk
+
+Informasi produk:
+- Foto utama.
+- Galeri foto.
+- Nama produk.
+- Deskripsi lengkap.
+- Harga normal.
+- Harga diskon.
+- Stok tersedia.
+- Kategori.
+- Varian produk jika ada.
+- Informasi tambahan yang dapat dikelola admin.
+
+Fitur:
+- Zoom gambar.
+- Pilihan varian.
+- Pengaturan kuantitas.
+- Tambah ke keranjang.
+- Checkout langsung.
+- Rekomendasi produk terkait.
+
+Admin dapat mengelola seluruh informasi produk melalui dashboard.
+
+---
+
+# 5. SISTEM KERANJANG BELANJA
+
+Buat shopping cart yang berfungsi penuh.
+
+Fitur:
+- Tambah produk.
+- Hapus produk.
+- Tambah atau kurangi jumlah produk.
+- Pilih varian.
+- Menampilkan subtotal setiap produk.
+- Menampilkan total keseluruhan.
+- Menampilkan foto dan nama produk.
+- Menampilkan stok.
+- Validasi agar jumlah pembelian tidak melebihi stok.
+- Menampilkan pesan ketika produk tidak tersedia.
+
+Keranjang harus tetap tersimpan ketika halaman di-refresh.
+
+Untuk pengguna yang belum login, gunakan penyimpanan keranjang sementara yang sesuai, kemudian validasi ulang seluruh data di backend saat checkout.
+
+Jangan menggunakan harga dari data keranjang frontend sebagai sumber kebenaran. Harga harus selalu diambil ulang dari database ketika checkout.
+
+---
+
+# 6. SISTEM CHECKOUT
+
+Buat halaman checkout yang profesional dan mudah digunakan.
+
+Checkout harus memiliki beberapa bagian.
+
+## A. Informasi Pembeli
+
+Field:
+- Nama lengkap.
+- Nomor WhatsApp.
+- Email (opsional jika tidak diperlukan).
+- Alamat pengiriman jika produk memerlukan pengiriman.
+- Catatan pesanan.
+- Pilihan pengiriman jika tersedia.
+
+Validasi:
+- Nama wajib diisi.
+- Nomor WhatsApp wajib valid.
+- Alamat wajib diisi jika metode pengiriman membutuhkan alamat.
+- Tampilkan pesan kesalahan yang mudah dipahami.
+
+## B. Ringkasan Pembelian
+
+Tampilkan:
+- Foto produk.
+- Nama produk.
+- Varian.
+- Jumlah.
+- Harga satuan.
+- Subtotal.
+- Diskon produk.
+- Diskon kupon.
+- Biaya pengiriman jika ada.
+- Total akhir.
+
+Seluruh perhitungan harus dilakukan atau diverifikasi di backend.
+
+## C. Form Kode Diskon
+
+Tambahkan input:
+
+"Masukkan Kode Diskon"
+
+Tombol:
+"Gunakan Kode"
+
+Sistem wajib:
+- Memeriksa keberadaan kode.
+- Memeriksa status aktif.
+- Memeriksa tanggal berlaku.
+- Memeriksa masa kedaluwarsa.
+- Memeriksa minimal pembelian.
+- Memeriksa kuota penggunaan.
+- Memeriksa apakah kode hanya berlaku untuk produk atau kategori tertentu.
+- Memeriksa batas maksimal potongan.
+- Menghitung ulang total transaksi di backend.
+
+Tampilkan hasil:
+- Kode berhasil digunakan.
+- Kode tidak valid.
+- Kode sudah kedaluwarsa.
+- Kuota kode sudah habis.
+- Produk tidak memenuhi syarat.
+- Minimal pembelian belum tercapai.
+
+Jangan pernah mempercayai nilai diskon yang dikirim oleh frontend.
+
+## D. Tombol Checkout
+
+Tombol utama:
+"LANJUTKAN KE PEMBAYARAN"
+
+Ketika diklik:
+1. Validasi informasi pembeli.
+2. Ambil ulang harga produk dari database.
+3. Validasi stok.
+4. Validasi kode diskon.
+5. Hitung seluruh biaya.
+6. Buat transaksi di backend secara aman.
+7. Simpan data pesanan.
+8. Buat order ID dan token resi unik.
+9. Tampilkan halaman pembayaran.
+
+Hindari pesanan duplikat akibat tombol checkout ditekan berulang kali. Gunakan mekanisme idempotency pada proses pembuatan order.
+
+---
+
+# 7. SISTEM PEMBAYARAN QRIS
+
+**Bagian ini sangat penting.**
+
+Saya akan melampirkan gambar QRIS resmi milik Catrizzz Store.
+
+Gunakan gambar QRIS yang saya lampirkan sebagai sumber gambar pembayaran.
+
+ATURAN WAJIB:
+- Jangan membuat QRIS baru.
+- Jangan menggambar ulang QRIS menggunakan AI.
+- Jangan mengubah isi, pola, susunan, atau data QRIS.
+- Jangan menggunakan QRIS palsu atau QRIS contoh.
+- Jangan mengganti gambar dengan gambar QRIS dari internet.
+- Jangan memotong bagian penting QRIS.
+- Pertahankan gambar asli dengan kualitas yang baik dan mudah dipindai.
+
+Simpan gambar QRIS di storage yang sesuai.
+
+Jika file QRIS belum berhasil terbaca, sediakan fitur upload QRIS pada dashboard admin dan tampilkan peringatan bahwa pembayaran belum siap digunakan. Jangan menganggap QRIS sudah tersedia jika belum benar-benar terpasang.
+
+## Tampilan Halaman Pembayaran
+
+Buat halaman pembayaran khusus dengan tampilan elegan.
+
+Tampilkan:
+- Logo Catrizzz Store.
+- Nomor pesanan.
+- Nama pembeli.
+- Rincian produk.
+- Total pembayaran.
+- Status pembayaran.
+- Gambar QRIS asli.
+- Petunjuk pembayaran.
+- Tombol konfirmasi pembayaran.
+
+Tampilkan nominal total transaksi secara jelas.
+
+Petunjuk pembayaran:
+
+1. Buka aplikasi mobile banking atau e-wallet yang mendukung QRIS.
+2. Pilih menu Scan QRIS.
+3. Scan QRIS Catrizzz Store.
+4. Periksa nama merchant pada aplikasi pembayaran.
+5. Masukkan atau periksa nominal sesuai total transaksi yang ditampilkan, mengikuti jenis QRIS yang digunakan.
+6. Selesaikan pembayaran.
+7. Kembali ke website.
+8. Tekan tombol Konfirmasi Pembayaran.
+
+Sediakan tombol:
+- Download QRIS.
+- Perbesar QRIS.
+- Salin total pembayaran.
+- Konfirmasi Pembayaran.
+- Hubungi Admin.
+
+Tambahkan informasi bahwa pembayaran baru dianggap lunas setelah diverifikasi oleh admin, kecuali nantinya sistem telah terintegrasi dengan payment gateway dan menerima verifikasi resmi.
+
+## Form Konfirmasi Pembayaran
+
+Ketika tombol konfirmasi diklik, tampilkan formulir:
+
+- Nama pembeli.
+- Nomor WhatsApp.
+- Nomor pesanan.
+- Waktu pembayaran.
+- Metode pembayaran: QRIS.
+- Nominal yang dibayarkan.
+- Upload bukti pembayaran (opsional tetapi sangat dianjurkan).
+- Catatan tambahan.
+
+Batasan upload:
+- Hanya izinkan format JPG, JPEG, PNG, atau PDF.
+- Validasi ukuran file.
+- Gunakan Firebase Storage atau storage backend yang aman.
+- Jangan menerima file berbahaya sebagai bukti pembayaran.
+
+Setelah formulir dikirim:
+1. Validasi data.
+2. Pastikan order benar-benar ada.
+3. Pastikan order belum dibatalkan atau diselesaikan.
+4. Simpan konfirmasi pembayaran.
+5. Simpan bukti pembayaran jika ada.
+6. Ubah status pembayaran menjadi `pending_verification`.
+7. Jangan langsung menandai pesanan sebagai lunas.
+8. Simpan catatan waktu konfirmasi.
+9. Siapkan tautan resi.
+10. Tampilkan notifikasi bahwa konfirmasi berhasil.
+
+Status pesanan dan pembayaran harus dibedakan.
+
+Contoh status pembayaran:
+- Unpaid.
+- Pending Verification.
+- Paid.
+- Rejected.
+- Refunded.
+
+Contoh status pesanan:
+- Pending Payment.
+- Processing.
+- Shipped.
+- Completed.
+- Cancelled.
+
+Hanya admin yang berwenang atau webhook payment gateway resmi yang boleh mengubah pembayaran menjadi Paid.
+
+---
+
+# 8. SISTEM REDIRECT OTOMATIS KE WHATSAPP
+
+Fitur ini wajib berfungsi.
+
+Setelah pelanggan berhasil mengirim konfirmasi pembayaran, website harus mengarahkan pelanggan ke WhatsApp resmi Catrizzz Store.
+
+Nomor tujuan:
+
+6287738172871
+
+Gunakan link:
+
+https://wa.me/6287738172871
+
+Ketika pelanggan menyelesaikan konfirmasi pembayaran, lakukan urutan berikut:
+
+1. Simpan konfirmasi pembayaran ke database.
+2. Pastikan backend mengembalikan respons berhasil.
+3. Ambil data pesanan dan tautan resi.
+4. Buat pesan WhatsApp secara otomatis.
+5. Buka WhatsApp dengan pesan yang sudah terisi.
+6. Tampilkan juga halaman sukses atau tombol kembali ke resi sebagai fallback jika WhatsApp gagal dibuka.
+
+Gunakan URL encoding yang benar untuk pesan WhatsApp.
+
+Contoh format pesan yang harus otomatis dibuat:
+
+"Halo Admin Catrizzz Store, saya sudah melakukan pembayaran dan ingin mengonfirmasi pesanan saya.
+
+DETAIL TRANSAKSI
+
+Nomor Pesanan: [ORDER_ID]
+Nama Pembeli: [NAMA_PEMBELI]
+Nomor WhatsApp: [NOMOR_PEMBELI]
+Produk: [DAFTAR_PRODUK]
+Total Pembayaran: [TOTAL]
+Metode Pembayaran: QRIS
+Waktu Konfirmasi: [WAKTU]
+
+Status: MENUNGGU VERIFIKASI ADMIN
+
+LINK RESI:
+[URL_RESI]
+
+Kode Akses Resi:
+[TOKEN_RESI]
+
+Mohon bantu verifikasi pembayaran saya.
+
+Terima kasih."
+
+Pastikan semua bagian dalam tanda kurung siku diganti dengan data transaksi yang sebenarnya.
+
+Gunakan tautan:
+
+`https://wa.me/6287738172871?text=...`
+
+Jangan mengklaim pesan telah terkirim otomatis. WhatsApp hanya akan dibuka dengan pesan yang sudah terisi, dan pelanggan tetap menekan tombol kirim sendiri.
+
+Sediakan tombol cadangan:
+- Buka WhatsApp.
+- Salin Pesan.
+- Lihat Resi.
+
+---
+
+# 9. SISTEM RESI DAN TOKENISASI UNIK
+
+**Fitur ini merupakan salah satu fitur paling penting di Catrizzz Store.**
+
+Setiap transaksi wajib memiliki dua identitas:
+
+1. Order ID untuk identitas pesanan.
+2. Token unik untuk keamanan akses resi.
+
+Contoh Order ID:
+`CTR-20261114-0001`
+
+Contoh Token:
+`CTRZ-7f9a2c8e...`
+
+Contoh URL resi:
+`https://domain-toko.com/resi/TOKEN_UNIK`
+
+Jangan gunakan contoh token yang sama untuk seluruh pembeli.
+
+## Ketentuan token
+
+- Setiap transaksi harus memiliki token berbeda.
+- Token harus dibuat menggunakan cryptographically secure random generator.
+- Gunakan entropi minimal 128 bit, disarankan 256 bit.
+- Jangan menggunakan nomor pesanan, nomor telepon, tanggal, atau ID berurutan sebagai token.
+- Simpan hash token di database, bukan token mentah.
+- Pastikan token tidak dapat ditebak.
+- Token harus terhubung dengan satu transaksi tertentu.
+- Token tidak boleh dapat digunakan untuk melihat transaksi orang lain.
+- Admin harus dapat menonaktifkan atau mengganti token jika diperlukan.
+
+Buat proses pembuatan dan penyimpanan token di backend.
+
+## Halaman Cek Resi
+
+Buat halaman khusus dengan URL:
+
+`/cek-resi`
+
+Tampilan berisi:
+- Headline "LACAK TRANSAKSI ANDA".
+- Input Order ID atau Token Resi.
+- Tombol "Cek Resi".
+- Informasi cara menemukan kode resi.
+
+Pelanggan juga dapat membuka URL resi langsung.
+
+## Halaman Detail Resi
+
+URL:
+
+`/resi/:token`
+
+Tampilkan halaman bukti transaksi dengan desain seperti invoice profesional.
+
+Informasi yang ditampilkan:
+
+**A. Identitas Transaksi**
+- Logo Catrizzz Store.
+- Order ID.
+- Tanggal transaksi.
+- Jam transaksi.
+- Token atau kode akses resi dalam bentuk yang aman.
+
+**B. Informasi Pembeli**
+- Nama pembeli.
+- Nomor WhatsApp yang disamarkan sebagian untuk tampilan publik.
+- Alamat hanya ditampilkan jika memang dibutuhkan untuk proses pengiriman dan memiliki perlindungan yang sesuai.
+
+**C. Detail Produk**
+- Gambar produk.
+- Nama produk.
+- Varian.
+- Jumlah.
+- Harga satuan.
+- Subtotal.
+
+**D. Ringkasan Biaya**
+- Subtotal produk.
+- Diskon.
+- Kode promo.
+- Biaya pengiriman.
+- Total pembayaran.
+
+**E. Pembayaran**
+- Metode pembayaran.
+- Nominal.
+- Waktu konfirmasi.
+- Status pembayaran.
+
+**F. Status Pesanan**
+Gunakan badge status dengan warna berbeda:
+
+- Pending Payment.
+- Menunggu Verifikasi.
+- Pembayaran Ditolak.
+- Pembayaran Berhasil.
+- Sedang Diproses.
+- Dikirim.
+- Selesai.
+- Dibatalkan.
+
+Tampilkan timeline perjalanan status pesanan agar pembeli dapat mengetahui perkembangannya.
+
+**G. Tombol Resi**
+- Download Resi PDF.
+- Cetak Resi.
+- Salin Link Resi.
+- Bagikan Resi ke WhatsApp.
+- Hubungi Admin.
+
+Resi harus menampilkan status terbaru dari database.
+
+Jangan menjadikan data status transaksi pada halaman resi sebagai data statis.
+
+## Keamanan halaman resi
+
+Halaman resi yang menggunakan token tidak boleh membocorkan:
+- Data pelanggan lain.
+- Password.
+- Data admin.
+- Bukti transaksi pelanggan lain.
+- Informasi internal database.
+
+Gunakan endpoint backend khusus yang hanya mengembalikan informasi resi yang aman untuk ditampilkan kepada pemilik token tersebut.
+
+Tambahkan rate limiting pada fitur pencarian resi.
+
+Jika token salah, tampilkan:
+"RESI TIDAK DITEMUKAN ATAU KODE AKSES TIDAK VALID."
+
+Jangan berikan petunjuk yang membantu orang menebak token yang benar.
+
+---
+
+# 10. DASHBOARD ADMIN
+
+Buat dashboard admin terpisah dengan tampilan profesional, modern, dan tetap menggunakan tema blue glow minimalis.
+
+URL:
+
+`/admin`
+
+Dashboard wajib memiliki autentikasi.
+
+Tidak boleh ada sistem login admin yang hanya mengandalkan password yang ditanam di frontend.
+
+Hanya akun admin yang telah mendapatkan otorisasi dari backend yang boleh mengakses dashboard.
+
+Jangan sediakan pendaftaran admin bebas untuk pengunjung.
+
+Sediakan dokumentasi untuk membuat akun admin pertama melalui mekanisme bootstrap atau pengaturan role yang aman di backend.
+
+## A. Dashboard Overview
+
+Tampilkan statistik:
+- Total penjualan.
+- Total transaksi.
+- Pesanan baru.
+- Menunggu pembayaran.
+- Menunggu verifikasi.
+- Pembayaran berhasil.
+- Pesanan diproses.
+- Pesanan selesai.
+- Pesanan dibatalkan.
+- Total produk aktif.
+- Produk stok rendah.
+- Jumlah pelanggan.
+
+Tampilkan grafik:
+- Grafik penjualan harian.
+- Grafik penjualan mingguan.
+- Grafik penjualan bulanan.
+- Grafik jumlah transaksi.
+
+Filter:
+- Hari ini.
+- 7 hari terakhir.
+- 30 hari terakhir.
+- Bulan ini.
+- Rentang tanggal khusus.
+
+Seluruh statistik wajib diambil dari data transaksi sebenarnya.
+
+## B. Manajemen Produk (CRUD)
+
+Admin harus memiliki fitur lengkap untuk:
+
+**Create:**
+- Tambah produk.
+- Upload foto.
+- Tambah nama produk.
+- Tambah deskripsi.
+- Tentukan harga.
+- Tentukan harga diskon.
+- Tentukan stok.
+- Pilih kategori.
+- Tambahkan badge.
+- Tambahkan varian.
+- Tentukan status aktif.
+
+**Read:**
+- Melihat seluruh produk.
+- Melihat detail produk.
+- Melihat jumlah stok.
+
+**Update:**
+- Edit semua informasi produk.
+- Update foto.
+- Mengubah harga.
+- Mengubah stok.
+- Mengubah status.
+
+**Delete:**
+- Hapus produk.
+- Tampilkan konfirmasi sebelum menghapus.
+- Jangan menghapus data historis transaksi yang sudah terkait dengan produk tersebut.
+
+Sediakan fitur pencarian, filter, pagination, dan sorting.
+
+## C. Manajemen Kategori
+
+Admin dapat:
+- Menambah kategori.
+- Mengedit kategori.
+- Menghapus kategori.
+- Upload icon atau gambar kategori.
+- Mengatur urutan tampilan.
+- Mengaktifkan atau menonaktifkan kategori.
+
+Pastikan produk yang masih terhubung dengan kategori tidak menyebabkan data menjadi rusak ketika kategori dihapus.
+
+## D. Manajemen Pesanan
+
+Admin dapat melihat semua pesanan dengan tabel:
+
+- Order ID.
+- Nama pelanggan.
+- Tanggal.
+- Total transaksi.
+- Metode pembayaran.
+- Status pembayaran.
+- Status pesanan.
+- Aksi.
+
+Fitur:
+- Search order ID.
+- Search nama pelanggan.
+- Filter tanggal.
+- Filter status.
+- Lihat detail pesanan.
+- Lihat bukti pembayaran.
+- Lihat token resi.
+- Buka halaman resi.
+- Download invoice.
+- Mengubah status pesanan.
+- Menambahkan catatan internal.
+
+## E. Verifikasi Pembayaran
+
+Buat halaman khusus verifikasi pembayaran.
+
+Admin dapat:
+- Melihat konfirmasi terbaru.
+- Melihat bukti pembayaran.
+- Melihat nominal yang dikonfirmasi.
+- Melihat waktu pembayaran.
+- Membandingkan data transaksi.
+- Menyetujui pembayaran.
+- Menolak pembayaran.
+
+Jika disetujui:
+- Payment status berubah menjadi `paid`.
+- Simpan tanggal dan waktu verifikasi.
+- Simpan ID admin yang melakukan verifikasi.
+- Order status dapat berubah menjadi `processing`.
+- Halaman resi otomatis memperlihatkan status baru.
+- Pelanggan dapat melihat pembaruan status ketika membuka resinya.
+
+Jika ditolak:
+- Status berubah menjadi `rejected`.
+- Admin wajib mengisi alasan penolakan.
+- Alasan dapat dilihat pelanggan melalui halaman resi dengan informasi yang aman.
+- Pesanan tidak boleh otomatis dianggap lunas.
+
+Catat setiap perubahan status dalam audit log.
+
+## F. Manajemen Kode Diskon / Voucher
+
+Buat halaman khusus:
+
+"DISCOUNT & PROMO MANAGEMENT"
+
+Admin dapat membuat kode diskon baru.
+
+Setiap kode diskon mempunyai field:
+
+- Nama promo.
+- Kode diskon.
+- Deskripsi.
+- Tipe diskon.
+- Nilai diskon.
+- Minimum pembelian.
+- Maksimum potongan.
+- Tanggal mulai.
+- Tanggal berakhir.
+- Maksimum penggunaan total.
+- Maksimum penggunaan per pelanggan.
+- Produk yang berlaku.
+- Kategori yang berlaku.
+- Status aktif atau nonaktif.
+
+Tipe diskon yang didukung:
+
+1. Persentase, contoh: `DISKON20` = 20%.
+2. Nominal tetap, contoh: `HEMAT10000` = Rp10.000.
+
+Contoh pembuatan:
+
+Kode: `CATRIZZZ20`
+
+Tipe: Percentage
+
+Nilai: 20%
+
+Minimum pembelian: Rp50.000
+
+Maksimum potongan: Rp25.000
+
+Maksimum penggunaan: 100 transaksi
+
+Masa berlaku: Dapat ditentukan admin.
+
+Admin dapat:
+- Membuat kode diskon.
+- Mengedit kode diskon.
+- Menghapus atau menonaktifkan kode.
+- Melihat jumlah penggunaan.
+- Melihat daftar transaksi yang memakai kode tersebut.
+- Mengatur kuota.
+- Mengatur masa berlaku.
+
+Sistem harus mencegah:
+- Pemakaian kode yang kedaluwarsa.
+- Pemakaian melebihi kuota.
+- Diskon melebihi nilai pembelian.
+- Penggunaan ganda yang melanggar batas.
+- Manipulasi nilai diskon melalui frontend.
+
+Penggunaan kode diskon harus dicatat di database dan dihitung secara aman di backend. Pengurangan kuota hanya dilakukan ketika transaksi berhasil dibuat sesuai kebijakan pemesanan yang ditentukan.
+
+## G. Manajemen Konten Website
+
+Admin harus dapat mengubah seluruh informasi yang tampil di halaman publik.
+
+Termasuk:
+- Logo.
+- Hero headline.
+- Hero description.
+- Hero image.
+- Banner promosi.
+- Banner aktif.
+- Kategori.
+- Produk unggulan.
+- Teks keunggulan toko.
+- FAQ.
+- Informasi kontak.
+- Link media sosial.
+- Footer.
+- Kebijakan privasi.
+- Syarat dan ketentuan.
+- Kebijakan pengembalian.
+
+Jangan membuat bagian penting website yang hanya bisa diubah dengan mengedit kode program.
+
+## H. Pengaturan Pembayaran
+
+Admin dapat:
+- Melihat QRIS aktif.
+- Mengunggah QRIS baru.
+- Mengganti gambar QRIS.
+- Mengaktifkan atau menonaktifkan pembayaran QRIS.
+- Mengatur instruksi pembayaran.
+- Mengatur informasi merchant yang ditampilkan.
+- Melihat daftar transaksi berdasarkan status pembayaran.
+
+Setiap pergantian QRIS harus menggunakan file baru dan tidak boleh mengubah bukti transaksi lama.
+
+## I. Pengaturan Toko
+
+Admin dapat mengubah:
+- Nama toko.
+- Logo.
+- Nomor WhatsApp.
+- Email.
+- Alamat toko.
+- Jam operasional.
+- Mata uang.
+- Biaya pengiriman.
+- Pengaturan pajak jika diperlukan.
+- Informasi rekening atau metode pembayaran tambahan apabila nanti ditambahkan.
+
+Nomor WhatsApp default:
+
+6287738172871
+
+Gunakan nomor dari pengaturan toko sebagai sumber konfigurasi, sehingga admin dapat menggantinya tanpa mengedit kode.
+
+## J. Manajemen Pelanggan
+
+Admin dapat melihat:
+- Nama pelanggan.
+- Nomor WhatsApp.
+- Total transaksi.
+- Total pembelian.
+- Riwayat pesanan.
+- Tanggal transaksi terakhir.
+
+Lindungi informasi sensitif pelanggan dan batasi akses hanya kepada admin yang berwenang.
+
+## K. Audit Log
+
+Buat catatan aktivitas admin, seperti:
+- Login.
+- Tambah produk.
+- Edit produk.
+- Hapus produk.
+- Membuat kode diskon.
+- Mengubah stok.
+- Verifikasi pembayaran.
+- Mengubah status transaksi.
+- Mengubah QRIS.
+- Mengubah pengaturan toko.
+
+Catatan berisi:
+- Aktor.
+- Jenis tindakan.
+- Waktu.
+- Objek yang berubah.
+- Ringkasan perubahan.
+
+Audit log tidak boleh bisa dimodifikasi oleh akun pelanggan.
+
+---
+
+# 11. SISTEM PENGIRIMAN DAN INVENTORY
+
+Buat sistem pengiriman yang fleksibel.
+
+Karena jenis produk dapat berbeda, pengiriman harus dapat dikonfigurasi admin.
+
+Dukung:
+- Produk digital atau tanpa pengiriman.
+- Pengiriman fisik.
+- Ambil di tempat jika diaktifkan admin.
+- Biaya pengiriman tetap atau metode lain yang dapat dikonfigurasi.
+
+Sistem stok:
+- Stok diambil dari database.
+- Stok divalidasi saat checkout.
+- Stok tidak boleh minus.
+- Hindari dua pelanggan membeli stok terakhir secara bersamaan.
+- Gunakan database transaction atau mekanisme locking yang sesuai.
+- Perubahan stok harus tercatat.
+- Pembatalan pesanan harus memiliki kebijakan pengembalian stok yang konsisten.
+
+Buat histori perubahan stok.
+
+---
+
+# 12. DESAIN INTERAKSI DAN ICON
+
+Semua icon wajib interaktif sesuai fungsinya.
+
+Gunakan Lucide Icons.
+
+Contoh:
+- Search.
+- Shopping Cart.
+- User.
+- Menu.
+- Home.
+- Package.
+- Ticket.
+- Tag.
+- Credit Card.
+- Qr Code.
+- Receipt.
+- Message Circle.
+- Settings.
+- Bar Chart.
+- Bell.
+- Edit.
+- Trash.
+- Eye.
+- Download.
+- Printer.
+- Copy.
+- Chevron Down.
+
+Aturan interaksi:
+- Icon memiliki hover state.
+- Tombol memiliki loading state.
+- Tampilkan feedback ketika aksi berhasil atau gagal.
+- Gunakan tooltip jika fungsi icon tidak jelas.
+- Tampilkan dialog konfirmasi untuk tindakan berisiko.
+- Sediakan disabled state ketika aksi tidak dapat dilakukan.
+- Jangan menggunakan icon tanpa fungsi.
+
+Tambahkan notifikasi toast untuk:
+- Produk berhasil ditambahkan.
+- Produk berhasil dihapus.
+- Kode diskon berhasil digunakan.
+- Pesanan berhasil dibuat.
+- Konfirmasi pembayaran berhasil.
+- Pembayaran berhasil diverifikasi.
+- Data berhasil diperbarui.
+- Terjadi kesalahan.
+
+Gunakan animasi dengan durasi wajar agar website tetap ringan.
+
+Hormati pengaturan reduced motion pada perangkat pengguna.
+
+---
+
+# 13. DATABASE DAN STRUKTUR DATA
+
+Rancang database secara terstruktur.
+
+Minimal buat koleksi atau tabel berikut:
+
+1. `users`
+2. `admin_roles`
+3. `products`
+4. `categories`
+5. `product_variants`
+6. `orders`
+7. `order_items`
+8. `payments`
+9. `payment_confirmations`
+10. `discount_codes`
+11. `discount_usages`
+12. `store_settings`
+13. `banners`
+14. `site_contents`
+15. `customers`
+16. `shipping_settings`
+17. `inventory_logs`
+18. `audit_logs`
+
+Data order minimal menyimpan:
+- Order ID.
+- Customer ID atau informasi pelanggan.
+- Item transaksi.
+- Snapshot nama produk.
+- Snapshot harga saat transaksi.
+- Snapshot varian.
+- Subtotal.
+- Diskon.
+- Kode promo.
+- Biaya pengiriman.
+- Total.
+- Status order.
+- Status pembayaran.
+- Timestamp.
+- Token resi dalam bentuk hash.
+- Catatan yang diperlukan.
+
+Gunakan snapshot produk pada transaksi agar perubahan nama atau harga produk tidak mengubah invoice transaksi lama.
+
+Pastikan relasi, indeks, validasi, dan aturan akses database dirancang dengan benar.
+
+---
+
+# 14. KEAMANAN WEBSITE
+
+Keamanan wajib menjadi prioritas.
+
+Terapkan:
+
+1. Validasi backend untuk semua input penting.
+2. Firebase Authentication atau autentikasi yang setara.
+3. Role-Based Access Control.
+4. Security rules untuk database.
+5. Storage rules untuk upload file.
+6. Rate limiting pada endpoint sensitif.
+7. Proteksi terhadap XSS.
+8. Proteksi terhadap injection.
+9. Validasi tipe dan ukuran file.
+10. Proteksi halaman admin.
+11. Proteksi endpoint verifikasi pembayaran.
+12. Proteksi manipulasi nominal transaksi.
+13. Proteksi manipulasi harga produk.
+14. Proteksi manipulasi kupon.
+15. Proteksi token resi.
+16. Logging untuk aktivitas penting.
+17. Error handling yang aman.
+
+Jangan mengirim secret key ke browser.
+
+Jangan pernah menyediakan endpoint publik yang bisa mengubah status transaksi menjadi Paid.
+
+Jangan mengandalkan status pembayaran dari localStorage atau state frontend.
+
+Untuk seluruh proses transaksi, gunakan data yang telah divalidasi di server.
+
+---
+
+# 15. SEO DAN PERFORMA
+
+Optimalkan website untuk mesin pencari dan pengalaman pengguna.
+
+Terapkan:
+- Judul halaman berbeda.
+- Meta description.
+- Open Graph metadata.
+- URL produk yang rapi.
+- Sitemap.
+- Robots.txt.
+- Semantic HTML.
+- Alt text pada gambar.
+- Lazy loading gambar.
+- Optimasi ukuran gambar.
+- Responsive image.
+- Loading skeleton.
+- Pagination.
+- Error boundary.
+
+Pastikan halaman publik dapat dimuat dengan cepat.
+
+Jangan memuat seluruh data transaksi atau produk secara berlebihan sekaligus.
+
+---
+
+# 16. DESAIN HALAMAN ERROR DAN EMPTY STATE
+
+Buat desain khusus untuk:
+- Halaman 404.
+- Produk tidak ditemukan.
+- Keranjang kosong.
+- Pesanan tidak ditemukan.
+- Token resi tidak valid.
+- Pembayaran belum dikonfirmasi.
+- Bukti pembayaran gagal diunggah.
+- Koneksi internet bermasalah.
+- Server gagal memproses transaksi.
+
+Jangan hanya menampilkan error teknis mentah kepada pelanggan.
+
+Berikan pesan yang mudah dimengerti serta tombol untuk mencoba kembali atau menghubungi WhatsApp toko.
+
+---
+
+# 17. PENGUJIAN FITUR
+
+Setelah website selesai dibangun, lakukan pengujian menyeluruh.
+
+Jangan menganggap fitur berfungsi hanya karena tampilannya sudah dibuat.
+
+Lakukan pengujian berikut:
+
+## Pengujian pelanggan
+
+1. Homepage berhasil ditampilkan.
+2. Produk berhasil dimuat dari database.
+3. Search produk berfungsi.
+4. Filter produk berfungsi.
+5. Detail produk dapat dibuka.
+6. Produk dapat dimasukkan ke keranjang.
+7. Jumlah produk dapat diubah.
+8. Keranjang tetap tersedia setelah refresh.
+9. Checkout dapat dilakukan.
+10. Validasi form berjalan.
+11. Harga tidak bisa dimanipulasi dari browser.
+12. Kode diskon valid dapat digunakan.
+13. Kode diskon tidak valid ditolak.
+14. QRIS tampil dengan benar.
+15. Konfirmasi pembayaran berhasil disimpan.
+16. Status pembayaran menjadi menunggu verifikasi.
+17. Tidak ada perubahan otomatis menjadi lunas.
+18. Tombol WhatsApp membuka chat yang benar.
+19. Pesan WhatsApp memiliki rincian transaksi.
+20. Resi memiliki token unik.
+21. Link resi dapat dibuka.
+22. Resi dapat diunduh dalam PDF.
+23. Token salah tidak bisa melihat transaksi.
+24. Pembeli dapat melihat perubahan status resi.
+
+## Pengujian admin
+
+1. Login admin berfungsi.
+2. Pengguna non-admin tidak dapat membuka dashboard.
+3. Admin dapat menambah produk.
+4. Admin dapat mengedit produk.
+5. Admin dapat menghapus produk.
+6. Admin dapat mengelola kategori.
+7. Admin dapat melihat pesanan.
+8. Admin dapat memverifikasi pembayaran.
+9. Admin dapat menolak pembayaran.
+10. Admin dapat mengubah status pesanan.
+11. Admin dapat membuat kode diskon.
+12. Admin dapat mengubah kode diskon.
+13. Admin dapat menonaktifkan kode diskon.
+14. Admin dapat mengubah banner.
+15. Admin dapat mengubah konten homepage.
+16. Admin dapat mengubah nomor WhatsApp.
+17. Admin dapat mengganti QRIS.
+18. Admin dapat melihat audit log.
+19. Statistik dashboard mengambil data asli.
+20. Perubahan admin langsung tercermin pada website publik.
+
+## Pengujian keamanan
+
+Uji pula:
+- Akses tanpa login.
+- Akses menggunakan akun non-admin.
+- Manipulasi harga.
+- Manipulasi diskon.
+- Manipulasi stok.
+- Token resi yang salah.
+- Percobaan membuka resi lain.
+- Upload file tidak valid.
+- Permintaan transaksi berulang.
+- Penggunaan kupon melewati kuota.
+
+Perbaiki semua error yang ditemukan sebelum menyatakan website selesai.
+
+---
+
+# 18. DATA AWAL DAN KONFIGURASI
+
+Buat sistem agar website dapat langsung dikonfigurasi setelah proses pembangunan.
+
+Data awal:
+
+Nama toko: Catrizzz Store
+
+Nomor WhatsApp: 6287738172871
+
+Mata uang: IDR (Rupiah)
+
+Format harga: Rp10.000
+
+Zona waktu: Asia/Jakarta
+
+Bahasa utama: Indonesia
+
+Tema: Minimalist Blue Glow
+
+Metode pembayaran awal: QRIS manual dengan verifikasi admin.
+
+Data produk awal boleh menggunakan contoh sementara untuk keperluan preview, tetapi beri tanda bahwa itu data demo.
+
+Jangan mencampurkan data demo dengan transaksi sungguhan.
+
+Sediakan fitur agar admin dapat menghapus seluruh data demo dengan aman.
+
+Untuk QRIS, gunakan hanya file yang saya lampirkan. Jika file belum tersedia, sediakan upload QRIS pada dashboard dan jangan mengaktifkan pembayaran sampai QRIS asli telah dikonfigurasi.
+
+Untuk akun admin, siapkan panduan bootstrap akun pertama dengan role administrator yang diberikan melalui backend. Jangan menggunakan username dan password admin yang ditanam secara publik di source code.
+
+---
+
+# 19. ALUR TRANSAKSI UTAMA
+
+Pastikan alur berikut berjalan secara utuh:
+
+**TAHAP 1 — PEMBELI**
+Pengunjung membuka Catrizzz Store.
+
+↓
+
+Melihat produk.
+
+↓
+
+Memilih produk.
+
+↓
+
+Menambahkan produk ke keranjang.
+
+↓
+
+Membuka checkout.
+
+↓
+
+Mengisi informasi pembeli.
+
+↓
+
+Memasukkan kode diskon jika tersedia.
+
+↓
+
+Menekan tombol lanjut ke pembayaran.
+
+**TAHAP 2 — SISTEM**
+Backend melakukan validasi seluruh data.
+
+↓
+
+Sistem menghitung total transaksi.
+
+↓
+
+Sistem menyimpan pesanan.
+
+↓
+
+Sistem membuat Order ID.
+
+↓
+
+Sistem membuat token resi unik.
+
+↓
+
+Sistem menyimpan hash token.
+
+↓
+
+Sistem menampilkan halaman pembayaran QRIS.
+
+**TAHAP 3 — PEMBAYARAN**
+Pembeli melakukan pembayaran melalui QRIS.
+
+↓
+
+Pembeli mengisi konfirmasi pembayaran.
+
+↓
+
+Pembeli mengunggah bukti pembayaran jika tersedia.
+
+↓
+
+Backend menyimpan konfirmasi.
+
+↓
+
+Status pembayaran menjadi Pending Verification.
+
+**TAHAP 4 — WHATSAPP**
+Sistem membuat pesan transaksi secara otomatis.
+
+↓
+
+Website mengarahkan pembeli ke WhatsApp Catrizzz Store.
+
+↓
+
+Pesan WhatsApp sudah terisi dengan informasi pesanan.
+
+↓
+
+Pembeli menekan tombol kirim.
+
+**TAHAP 5 — ADMIN**
+Admin menerima konfirmasi melalui WhatsApp.
+
+↓
+
+Admin membuka dashboard.
+
+↓
+
+Admin memeriksa transaksi dan bukti pembayaran.
+
+↓
+
+Admin menyetujui atau menolak pembayaran.
+
+↓
+
+Status transaksi diperbarui.
+
+**TAHAP 6 — RESI**
+Pembeli membuka link resi.
+
+↓
+
+Sistem memeriksa token.
+
+↓
+
+Sistem mengambil transaksi yang sesuai.
+
+↓
+
+Pembeli melihat status transaksi terbaru.
+
+↓
+
+Pembeli dapat mengunduh atau mencetak resi.
+
+---
+
+# 20. OUTPUT YANG WAJIB KAMU HASILKAN
+
+Saya tidak hanya membutuhkan penjelasan atau rancangan.
+
+Saya membutuhkan implementasi website yang benar-benar berjalan.
+
+Hasil akhir wajib meliputi:
+
+1. Website frontend Catrizzz Store.
+2. Halaman homepage.
+3. Halaman katalog produk.
+4. Halaman detail produk.
+5. Sistem keranjang.
+6. Sistem checkout.
+7. Sistem pembayaran QRIS.
+8. Form konfirmasi pembayaran.
+9. Redirect WhatsApp dengan pesan otomatis terisi.
+10. Sistem order ID.
+11. Sistem token resi unik.
+12. Halaman cek resi.
+13. Halaman detail resi.
+14. Download resi PDF.
+15. Dashboard admin.
+16. Sistem login admin.
+17. CRUD produk.
+18. CRUD kategori.
+19. Manajemen pesanan.
+20. Verifikasi pembayaran.
+21. Manajemen kode diskon.
+22. Manajemen konten website.
+23. Pengaturan QRIS.
+24. Pengaturan toko.
+25. Database.
+26. Backend.
+27. Security rules.
+28. Validasi transaksi.
+29. Audit log.
+30. Dokumentasi instalasi dan deployment.
+
+Berikan juga:
+- Struktur folder proyek.
+- Penjelasan arsitektur.
+- Panduan konfigurasi Firebase.
+- Panduan konfigurasi storage.
+- Panduan membuat admin pertama.
+- Panduan memasukkan QRIS asli.
+- Panduan menjalankan website.
+- Panduan deploy website.
+- Daftar environment variables yang dibutuhkan.
+- File `.env.example` jika diperlukan.
+- Daftar fitur yang sudah benar-benar berfungsi.
+- Daftar konfigurasi yang masih harus saya isi sendiri.
+
+Jangan mengarang hasil pengujian. Laporkan fitur yang sudah diuji dan fitur yang belum dapat diuji secara jujur.
+
+---
+
+# 21. INSTRUKSI PENTING DALAM PROSES PEMBANGUNAN
+
+Ikuti prioritas pengerjaan berikut:
+
+**PRIORITAS 1 — FONDASI**
+Bangun struktur proyek, konfigurasi backend, database, dan autentikasi.
+
+**PRIORITAS 2 — WEBSITE PUBLIK**
+Bangun homepage, katalog, detail produk, dan sistem keranjang.
+
+**PRIORITAS 3 — TRANSAKSI**
+Bangun checkout, validasi harga, stok, kode diskon, dan pembuatan order.
+
+**PRIORITAS 4 — PEMBAYARAN**
+Bangun halaman QRIS, konfirmasi pembayaran, penyimpanan bukti transaksi, dan status pembayaran.
+
+**PRIORITAS 5 — WHATSAPP DAN RESI**
+Bangun redirect WhatsApp, pesan otomatis, tokenisasi, halaman cek resi, dan invoice PDF.
+
+**PRIORITAS 6 — ADMIN**
+Bangun dashboard dan semua fitur CRUD serta manajemen operasional.
+
+**PRIORITAS 7 — PENGUJIAN DAN OPTIMASI**
+Uji seluruh alur transaksi, keamanan, responsivitas, dan performa.
+
+Jika proses pembangunan terlalu besar untuk satu tahap, lanjutkan secara bertahap berdasarkan prioritas di atas. Pertahankan struktur dan kode yang sudah ada. Jangan menghapus fitur yang sudah berhasil dibuat ketika melanjutkan tahap berikutnya.
+
+Setiap kali menyelesaikan suatu bagian, periksa kembali apakah bagian tersebut benar-benar berjalan sebelum melanjutkan.
+
+**JANGAN:**
+- Hanya membuat tampilan visual tanpa backend.
+- Menggunakan data produk statis sebagai database utama.
+- Menggunakan tombol yang tidak memiliki fungsi.
+- Mengarang QRIS.
+- Membuat transaksi palsu.
+- Membuat status pembayaran otomatis lunas setelah pelanggan mengklik konfirmasi.
+- Menggunakan token resi yang mudah ditebak.
+- Menyimpan password atau secret key dalam frontend.
+- Memberikan akses dashboard kepada pengunjung biasa.
+- Mengabaikan validasi transaksi.
+- Menghapus fitur yang sudah dibangun ketika melakukan revisi.
+
+**HASIL AKHIR YANG SAYA INGINKAN:**
+
+Sebuah website e-commerce bernama **CATRIZZZ STORE** dengan desain minimalist blue glow yang premium, interaktif, responsif, dan siap digunakan untuk berjualan.
+
+Pelanggan dapat melihat produk, memasukkan produk ke keranjang, checkout, membayar melalui QRIS asli yang saya lampirkan, melakukan konfirmasi pembayaran, diarahkan ke WhatsApp toko dengan pesan transaksi yang sudah terisi, dan melihat resi pembelian melalui link dengan token unik.
+
+Sementara itu, admin memiliki kendali penuh terhadap produk, kategori, transaksi, verifikasi pembayaran, kode diskon, banner, konten, QRIS, dan seluruh informasi yang ditampilkan pada website.
+
+**Mulai bangun aplikasinya sekarang. Prioritaskan implementasi fungsional, keamanan transaksi, dan pengalaman pengguna yang baik.**

@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Outfit', system-ui, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --navy-primary: #102A43;
+    --navy-secondary: #244B75;
+    --navy-soft: #EAF2FA;
+    --border-hairline: #E5EAF0;
+    --text-body: #253449;
+    --text-muted: #718096;
+    --cursor-x: -1000px;
+    --cursor-y: -1000px;
+    --ambient-opacity: 0.065;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: #FFFFFF;
+    color: #253449;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    color: #102A43;
+  }
+
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Global Interactive Navy Cursor Ambient Lighting (Desktop Fine Pointer Only) */
+.cursor-ambient-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    520px circle at var(--cursor-x, -1000px) var(--cursor-y, -1000px),
+    rgba(36, 75, 117, var(--ambient-opacity, 0.065)) 0%,
+    rgba(16, 42, 67, 0.025) 38%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  transition: opacity 260ms ease;
+}
+
+:root[data-near-interactive='true'] {
+  --ambient-opacity: 0.095;
+}
+
+/* Layered Section Depth */
+.section-layer-white {
+  background: #FFFFFF;
+  position: relative;
+}
+
+.section-layer-subtle {
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  border-top: 1px solid #E5EAF0;
+  border-bottom: 1px solid #E5EAF0;
+  position: relative;
+}
+
+/* Clean White + Navy Ambience Elevated Surfaces */
+.surface-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E5EAF0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(16, 42, 67, 0.04),
+    0 6px 18px -10px rgba(16, 42, 67, 0.09);
+  transition:
+    border-color 200ms ease,
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.surface-subtle {
+  position: relative;
+  background: linear-gradient(180deg, #F8FAFC 0%, #F4F7FB 100%);
+  border: 1px solid #E5EAF0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 2px rgba(16, 42, 67, 0.03);
+}
+
+.surface-glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #E5EAF0;
+  box-shadow: 0 4px 20px -14px rgba(16, 42, 67, 0.14);
+}
+
+/* Local Spotlight Reactive Surface (Desktop Hover) */
+.spotlight-surface {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--spot-opacity);
+  background: radial-gradient(
+    320px circle at var(--spot-x) var(--spot-y),
+    rgba(36, 75, 117, 0.085) 0%,
+    rgba(234, 242, 250, 0.04) 45%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  transition: opacity 220ms ease;
+}
+
+.spotlight-surface:hover {
+  --spot-opacity: 1;
+  border-color: rgba(36, 75, 117, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 12px 26px -12px rgba(16, 42, 67, 0.14),
+    0 0 0 1px rgba(36, 75, 117, 0.08);
+}
+
+/* Animated Nav Link Underline */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: #102A43;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+/* Primary & Secondary Navy Micro-Interactive Buttons */
+.btn-navy-primary {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-opacity: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: #102A43;
+  color: #FFFFFF;
+  transition:
+    background-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 3px 10px -2px rgba(16, 42, 67, 0.24);
+}
+
+.btn-navy-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--spot-opacity);
+  background: radial-gradient(
+    180px circle at var(--spot-x) var(--spot-y),
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transition: opacity 200ms ease;
+}
+
+.btn-navy-primary:hover:not(:disabled) {
+  --spot-opacity: 1;
+  background-color: #244B75;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 12px 24px -6px rgba(16, 42, 67, 0.32),
+    0 0 0 3px rgba(36, 75, 117, 0.1);
+}
+
+.btn-navy-primary:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn-navy-outline {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-opacity: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  color: #102A43;
+  border: 1px solid #E5EAF0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(16, 42, 67, 0.04);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 200ms ease,
+    transform 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-navy-outline:hover:not(:disabled) {
+  background-color: #EAF2FA;
+  border-color: rgba(36, 75, 117, 0.38);
+  box-shadow: 0 8px 18px -8px rgba(16, 42, 67, 0.18);
+}
+
+.btn-navy-outline:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+/* Touch / Click Subtle Navy Ripple */
+.ripple-host {
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navy-ripple-wave {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(36, 75, 117, 0.28) 0%, rgba(16, 42, 67, 0.12) 60%, rgba(16, 42, 67, 0) 100%);
+  transform: scale(0);
+  opacity: 0.9;
+  animation: navy-ripple-expand 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.navy-ripple-wave-light {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.38) 0%, rgba(234, 242, 250, 0.18) 60%, rgba(255, 255, 255, 0) 100%);
+}
+
+@keyframes navy-ripple-expand {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Elevated Premium Product Card Hover + Spotlight + Click Compression */
+.product-card-interactive {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-opacity: 0;
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid #E5EAF0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 2px rgba(16, 42, 67, 0.04),
+    0 6px 16px -10px rgba(16, 42, 67, 0.09);
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card-interactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--spot-opacity);
+  background: radial-gradient(
+    280px circle at var(--spot-x) var(--spot-y),
+    rgba(36, 75, 117, 0.085) 0%,
+    rgba(234, 242, 250, 0.04) 48%,
+    rgba(255, 255, 255, 0) 78%
+  );
+  transition: opacity 220ms ease;
+  z-index: 1;
+}
+
+.product-card-interactive:hover {
+  --spot-opacity: 1;
+  transform: translateY(-4px);
+  border-color: rgba(36, 75, 117, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 18px 34px -12px rgba(16, 42, 67, 0.16),
+    0 6px 16px -6px rgba(36, 75, 117, 0.1),
+    0 0 0 1px rgba(36, 75, 117, 0.08);
+}
+
+.product-card-interactive:active {
+  transform: translateY(-1px) scale(0.985);
+}
+
+/* Clean Form Inputs with Navy Focus Ring */
+.input-navy {
+  background-color: #FFFFFF;
+  border: 1px solid #E5EAF0;
+  color: #253449;
+  box-shadow: inset 0 1px 2px rgba(16, 42, 67, 0.03);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.input-navy::placeholder {
+  color: #718096;
+}
+
+.input-navy:focus {
+  outline: none;
+  border-color: #102A43;
+  box-shadow: 0 0 0 3px rgba(36, 75, 117, 0.12);
+}
+
+/* Disable Desktop Cursor Ambience & Heavy Hover Spotlights on Touch Devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor-ambient-layer {
+    display: none !important;
+  }
+  .product-card-interactive::before,
+  .spotlight-surface::before,
+  .btn-navy-primary::before {
+    display: none !important;
+  }
+  .product-card-interactive:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .cursor-ambient-layer {
+    display: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .no-print,
+  .cursor-ambient-layer {
+    display: none !important;
+  }
+  .print-invoice {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+  .print-invoice * {
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+}
